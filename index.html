@@ -59,10 +59,17 @@
 
         /* --- ОБНОВЛЕННАЯ ЗАГЛУШКА --- */
         #welcomeOverlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            display: flex; justify-content: center; align-items: center;
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%;
+            display: flex; 
+            justify-content: center; 
+            align-items: center;
             z-index: 10000;
-            background: url('https://lh3.googleusercontent.com/d/1IrENtLEYrgN5EfsSUAEsfNNLH6dBYW-8') center/cover;
+            /* Вот правильная строка ниже: */
+            background: url('images/hero.JPG') center/cover no-repeat;
         }
         .overlay-glass {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
@@ -120,15 +127,15 @@
         /* HERO */
         /* 1. ФИКС ФОНА HERO */
         .hero { 
-            /* Путь к картинке + градиент для затемнения (чтобы текст читался) */
+            /* Путь к картинке из папки images + градиент для затемнения */
             background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
-                        url('https://i.ibb.co/3wkD2cV/e25bd276-074e-4321-8034-406a9ce3271c.jpg');
+                        url('images/hero.JPG'); /* Проверь название и расширение (JPG или jpg) */
             
             /* Эти настройки критичны для мобилок */
             background-position: center center;
             background-size: cover; 
             background-repeat: no-repeat;
-            background-attachment: scroll; /* Важно: убираем fixed для iPhone */
+            background-attachment: scroll; 
             
             /* Высота и центровка */
             min-height: 100vh;
@@ -330,15 +337,15 @@
     </section>
 
     <section class="reveal" style="background: white;">
-        <h2>Наша история</h2>
-        <div class="block-subtitle">В каждом моменте</div>
-        <div class="photo-grid">
-            <img src="https://www.dropbox.com/scl/fi/4ndwerm92uekej6o1baf0/sashaphoto.JPG?rlkey=m1q60vdzsraljua8upwqhf3w2&st=9vkzkezr&raw=1">
-            <img src="https://www.dropbox.com/scl/fi/9zu1whsukgg6bqjs9z7rj/together.JPG?rlkey=vdzbw2z91448qy0283y0ob3im&st=22r59hgs&raw=1">
-            <img src="https://www.dropbox.com/scl/fi/51lglof6klpxjh3v8dbvm/dashaphoto.jpg?rlkey=efmwyxwrz3wbjcthg9m8652lr&st=s1jl1vtg&raw=1">
-        </div>
-        <div class="romance-text">Любовь — это путешествие, которое только начинается...</div>
-    </section>
+            <h2>Наша история</h2>
+            <div class="block-subtitle">В каждом моменте</div>
+            <div class="photo-grid">
+                <img src="images/sasha.JPG">
+                <img src="images/together.JPG">
+                <img src="images/dasha.jpg">
+            </div>
+            <div class="romance-text">Любовь — это путешествие, которое только начинается...</div>
+        </section>
 
     <section class="reveal calendar-section">
         <h2>Сохраните дату</h2>
@@ -356,7 +363,7 @@
         <div class="romance-text">В этот день мы скажем друг другу «Да»</div>
     </section>
 
-    <section class="dresscode reveal" style="background-color: var(--sand);">
+    <section class="reveal" style="background: #faf9f6;">
         <h2>Дресс-код</h2>
         <div class="block-subtitle">Ваша красота — лучшее украшение вечера</div>
         <p>Будем признательны за поддержку палитры нашей свадьбы:</p>
@@ -367,7 +374,7 @@
             <div class="swatch" style="background-color: #4B3621;"></div>
             <div class="swatch" style="background-color: #2C1E12;"></div>
         </div>
-        <img src="https://i.ibb.co/YBPw3zdM/d5cc3987-4c21-4267-98e8-a465e104ae50.jpg">
+        <img src="images/dresscode.JPG" alt="Дресс-код" class="dresscode-img">
     </section>
 
     <section class="reveal wishes-section">
@@ -539,6 +546,7 @@
     </script>
 </body>
 </html>
+
 
 
 
