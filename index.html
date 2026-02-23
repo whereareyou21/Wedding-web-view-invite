@@ -162,26 +162,34 @@
                 
         /* 2. ФИКС КАЛЕНДАРЯ */
         .calendar-container { 
-            max-width: 95%; /* Вместо фиксированных пикселей */
-            width: 340px;
+            width: 95%; /* Занимает почти всю ширину экрана */
+            max-width: 400px; /* Но не становится огромным на ПК */
             margin: 20px auto; 
             border: 2px solid var(--chocolate); 
-            padding: 15px; /* Уменьшаем внутренние отступы */
+            padding: 10px; /* Минимальный отступ внутри */
             background: white; 
-            box-sizing: border-box;
+            box-sizing: border-box; /* Чтобы padding не раздувал ширину */
         }
         
         .calendar-grid { 
             display: grid; 
             grid-template-columns: repeat(7, 1fr); 
-            gap: 5px; /* Уменьшаем расстояние между числами */
-            font-size: 1rem; /* Чуть меньше шрифт */
+            gap: 4px; /* Минимальный зазор между числами */
+            font-size: clamp(0.8rem, 4vw, 1.2rem); /* Шрифт подстраивается под экран */
+            text-align: center;
         }
         
         .wedding-day { 
+            background-color: var(--accent-beige); 
+            color: white; 
+            border-radius: 50%; 
             width: 30px; 
             height: 30px; 
-            font-size: 0.9rem;
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            margin: 0 auto;
+            font-weight: bold;
         }
         
         /* 3. ФИКС СЛАЙДЕРА (ПОЖЕЛАНИЯ) */
@@ -189,16 +197,17 @@
             display: flex; 
             overflow-x: auto; 
             scroll-snap-type: x mandatory; 
-            -webkit-overflow-scrolling: touch; /* Плавность для iOS */
+            -webkit-overflow-scrolling: touch; 
             scrollbar-width: none; 
+            /* Добавляем, чтобы свайп вбок не блокировал скролл вниз */
+            touch-action: pan-y; 
         }
         
         .wish-card { 
             flex: 0 0 100%; 
             scroll-snap-align: center; 
-            scroll-snap-stop: always; /* Чтобы не проскакивало мимо */
-            padding: 10px; 
-            box-sizing: border-box;
+            /* Убираем жесткую блокировку, если она была */
+            scroll-snap-stop: normal; 
         }
         
         .wish-card-inner {
@@ -469,6 +478,7 @@
     </script>
 </body>
 </html>
+
 
 
 
