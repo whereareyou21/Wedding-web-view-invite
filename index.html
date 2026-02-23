@@ -161,22 +161,39 @@
         }
                 
         /* 2. ФИКС КАЛЕНДАРЯ */
-        .calendar-container { 
-            width: 95%; /* Занимает почти всю ширину экрана */
-            max-width: 400px; /* Но не становится огромным на ПК */
+         .calendar-container { 
+            width: 92% !important; /* Строго 92% от ширины экрана */
+            max-width: 350px; 
             margin: 20px auto; 
             border: 2px solid var(--chocolate); 
-            padding: 10px; /* Минимальный отступ внутри */
+            padding: 10px !important; 
             background: white; 
-            box-sizing: border-box; /* Чтобы padding не раздувал ширину */
+            box-sizing: border-box !important; /* Учитывает границы в общей ширине */
+            overflow: hidden; /* Запрещает вылет элементов наружу */
         }
         
         .calendar-grid { 
             display: grid; 
-            grid-template-columns: repeat(7, 1fr); 
-            gap: 4px; /* Минимальный зазор между числами */
-            font-size: clamp(0.8rem, 4vw, 1.2rem); /* Шрифт подстраивается под экран */
+            grid-template-columns: repeat(7, 1fr); /* Ровно 7 равных колонок */
+            gap: 2px; /* Минимальный зазор */
             text-align: center;
+            width: 100%;
+        }
+        
+        .day-name { 
+            color: var(--accent-beige); 
+            font-weight: bold; 
+            font-size: 0.75rem; /* Уменьшаем названия дней: ПН, ВТ... */
+            padding-bottom: 10px;
+            text-transform: uppercase;
+        }
+        
+        .calendar-grid div:not(.day-name):not(.wedding-day) {
+            font-size: 0.9rem; /* Размер обычных чисел */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 35px; /* Фиксированная высота ячейки */
         }
         
         .wedding-day { 
@@ -189,9 +206,10 @@
             align-items: center; 
             justify-content: center; 
             margin: 0 auto;
+            font-size: 0.9rem;
             font-weight: bold;
         }
-        
+                
         /* 3. ФИКС СЛАЙДЕРА (ПОЖЕЛАНИЯ) */
         .wish-viewport { 
             display: flex; 
@@ -478,6 +496,7 @@
     </script>
 </body>
 </html>
+
 
 
 
