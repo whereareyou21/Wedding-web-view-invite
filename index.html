@@ -118,14 +118,22 @@
         .music-control svg { width: 26px; fill: var(--chocolate); }
 
         /* HERO */
-/* 1. ФИКС ФОНА HERO */
-        .hero { 
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
-                        url('https://imgfy.ru/ib/25UaqDXsImvYUp5_1771790575.jpg') center/cover no-repeat; 
-            /* Убираем fixed для мобилок, так как он ломает фон */
-            background-attachment: scroll; 
-            color: white; 
-            height: 100vh; /* Гарантируем высоту на весь экран */
+        /* 1. ФИКС ФОНА HERO */
+        .hero h1 { 
+            font-family: 'Bodoni Moda', serif; 
+            font-size: clamp(2.5rem, 10vw, 5rem); /* Гибкий размер: не меньше 2.5rem, не больше 5rem */
+            text-transform: uppercase; 
+            line-height: 1.1; 
+            margin-bottom: 10px;
+            letter-spacing: 3px;
+            padding: 0 10px;
+        }
+        
+        /* Подзаголовок (дата) */
+        .hero .block-subtitle {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(1.8rem, 6vw, 3rem);
+            margin-top: 10px;
         }
         
         /* 2. ФИКС КАЛЕНДАРЯ */
@@ -308,18 +316,18 @@
         <div class="block-subtitle">О самом важном</div>
         <div class="wishes-container">
             <div class="wish-viewport" id="slider">
-                <div class="wish-card">
-                    <div class="wish-card-inner">
-                        <h3>АТМОСФЕРА ПРАЗДНИКА</h3>
-                        <p>Мы мечтаем, чтобы этот вечер стал для вас сказкой. Пожалуйста, забудьте о повседневных заботах и наслаждайтесь моментом вместе с нами.</p>
-                    </div>
+            <div class="wish-card">
+                <div class="wish-card-inner">
+                    <h3>АТМОСФЕРА ПРАЗДНИКА</h3>
+                    <p>Мы мечтаем, чтобы этот вечер стал для вас сказкой. Пожалуйста, забудьте о повседневных заботах и наслаждайтесь моментом вместе с нами.</p>
                 </div>
-                <div class="wish-card">
-                    <div class="wish-card-inner">
-                        <h3>ТИШИНА И ЧУВСТВА</h3>
-                        <p>Мы просим вас воздержаться от криков «Горько!». Пусть вместо этого звучит искренний смех, теплые тосты и красивая музыка.</p>
-                    </div>
+            </div>
+            <div class="wish-card">
+                <div class="wish-card-inner">
+                    <h3>ТИШИНА И ЧУВСТВА</h3>
+                    <p>Мы просим вас воздержаться от криков «Горько!». Пусть вместо этого звучит искренний смех, теплые тосты и красивая музыка.</p>
                 </div>
+            </div>
             </div>
             <div class="slider-nav">
                 <button class="nav-btn" onclick="moveSlider(-1)">&#10229;</button>
@@ -433,6 +441,7 @@
     </script>
 </body>
 </html>
+
 
 
 
