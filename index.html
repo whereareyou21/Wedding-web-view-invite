@@ -118,8 +118,69 @@
         .music-control svg { width: 26px; fill: var(--chocolate); }
 
         /* HERO */
-        .hero { background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://imgfy.ru/ib/25UaqDXsImvYUp5_1771790575.jpg') center/cover fixed; color: white; }
-        .hero h1 { font-family: 'Bodoni Moda', serif; font-size: clamp(2.5rem, 8vw, 5.5rem); text-transform: uppercase; line-height: 1.2; }
+/* 1. ФИКС ФОНА HERO */
+        .hero { 
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                        url('https://imgfy.ru/ib/25UaqDXsImvYUp5_1771790575.jpg') center/cover no-repeat; 
+            /* Убираем fixed для мобилок, так как он ломает фон */
+            background-attachment: scroll; 
+            color: white; 
+            height: 100vh; /* Гарантируем высоту на весь экран */
+        }
+        
+        /* 2. ФИКС КАЛЕНДАРЯ */
+        .calendar-container { 
+            max-width: 95%; /* Вместо фиксированных пикселей */
+            width: 340px;
+            margin: 20px auto; 
+            border: 2px solid var(--chocolate); 
+            padding: 15px; /* Уменьшаем внутренние отступы */
+            background: white; 
+            box-sizing: border-box;
+        }
+        
+        .calendar-grid { 
+            display: grid; 
+            grid-template-columns: repeat(7, 1fr); 
+            gap: 5px; /* Уменьшаем расстояние между числами */
+            font-size: 1rem; /* Чуть меньше шрифт */
+        }
+        
+        .wedding-day { 
+            width: 30px; 
+            height: 30px; 
+            font-size: 0.9rem;
+        }
+        
+        /* 3. ФИКС СЛАЙДЕРА (ПОЖЕЛАНИЯ) */
+        .wish-viewport { 
+            display: flex; 
+            overflow-x: auto; 
+            scroll-snap-type: x mandatory; 
+            -webkit-overflow-scrolling: touch; /* Плавность для iOS */
+            scrollbar-width: none; 
+        }
+        
+        .wish-card { 
+            flex: 0 0 100%; 
+            scroll-snap-align: center; 
+            scroll-snap-stop: always; /* Чтобы не проскакивало мимо */
+            padding: 10px; 
+            box-sizing: border-box;
+        }
+        
+        .wish-card-inner {
+            padding: 40px 20px !important; /* Уменьшаем гигантские отступы */
+            min-height: 300px !important;
+        }
+        
+        /* АДАПТИВНОСТЬ ПОД МАЛЕНЬКИЕ ТЕЛЕФОНЫ */
+        @media (max-width: 370px) {
+            .calendar-grid { font-size: 0.8rem; gap: 2px; }
+            .day-name { font-size: 0.7rem; }
+            .wedding-day { width: 25px; height: 25px; }
+            h2 { font-size: 1.8rem; }
+        }
 
         /* STORY */
         .photo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; width: 100%; max-width: 1200px; margin-top: 40px; }
@@ -377,3 +438,4 @@
     </script>
 </body>
 </html>
+
