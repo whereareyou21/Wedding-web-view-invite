@@ -480,16 +480,51 @@
 
         const scriptURL = 'https://script.google.com/macros/s/AKfycbyYeb8PJXbkqzQNdh8dO952rlykomLnbQbK2zhbEMqV9DAL1aj-XgSDIJX5Op2KC8dr3Q/exec';
         const form = document.getElementById('weddingForm');
+        
         form.addEventListener('submit', e => {
             e.preventDefault();
-            document.getElementById('submitBtn').disabled = true;
-            document.getElementById('submitBtn').innerText = 'ОТПРАВЛЯЕМ...';
-            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-                .then(() => { form.style.display = 'none'; document.getElementById('success').style.display = 'block'; });
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+            btn.innerText = 'ОТПРАВЛЯЕМ...';
+
+            const formData = new FormData(form);
+            
+            // Собираем все выбранные напитки в одну строку через запятую
+            const allDrinks = formData.getAll('drinks').join(', ');
+
+            // Создаем объект данных, который соответствует порядку в твоем скрипте Apps Script:
+            // 1. Дата (делается скриптом, здесь не нужна)
+            // 2. name
+            // 3. presence
+            // 4. partner
+            // 5. drinks (наша склеенная строка)
+            // 6. custom_drink
+            const dataToPost = {
+                name: formData.get('name'),
+                presence: formData.get('presence'),
+                partner: formData.get('partner'),
+                drinks: allDrinks, // ТЕПЕРЬ ТУТ БУДУТ ВСЕ НАПИТКИ
+                custom_drink: formData.get('custom_drink')
+            };
+
+            fetch(scriptURL, { 
+                method: 'POST', 
+                mode: 'no-cors', 
+                body: new URLSearchParams(dataToPost) 
+            })
+            .then(() => { 
+                form.style.display = 'none'; 
+                document.getElementById('success').style.display = 'block'; 
+            })
+            .catch(error => {
+                console.error('Ошибка!', error.message);
+                btn.disabled = false;
+                btn.innerText = 'ОШИБКА. ПОВТОРИТЬ';
+            });
         });
-    </script>
 </body>
 </html>
+
 
 
 
