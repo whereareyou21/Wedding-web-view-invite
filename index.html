@@ -119,27 +119,47 @@
 
         /* HERO */
         /* 1. ФИКС ФОНА HERO */
-        /* Заголовок HERO */
+        .hero { 
+            /* Путь к картинке + градиент для затемнения (чтобы текст читался) */
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('https://imgfy.ru/ib/25UaqDXsImvYUp5_1771790575.jpg');
+            
+            /* Эти настройки критичны для мобилок */
+            background-position: center center;
+            background-size: cover; 
+            background-repeat: no-repeat;
+            background-attachment: scroll; /* Важно: убираем fixed для iPhone */
+            
+            /* Высота и центровка */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+        
         .hero h1 { 
             font-family: 'Bodoni Moda', serif; 
             font-size: clamp(2.5rem, 10vw, 5rem); 
             text-transform: uppercase; 
             line-height: 1.1; 
-            margin-bottom: 15px;
+            margin: 0;
             letter-spacing: 5px;
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.5); /* Тень, чтобы текст не сливался */
+            text-shadow: 2px 2px 15px rgba(0,0,0,0.7); /* Сильная тень для текста */
         }
         
-        /* Дата в HERO */
         .hero .block-subtitle {
-            font-family: 'Bodoni Moda', serif !important; /* Убираем курсив, делаем строгий стиль */
+            font-family: 'Bodoni Moda', serif !important;
             font-size: clamp(1.5rem, 5vw, 2.5rem);
-            color: #E3D5CA !important; /* Нежный бежевый цвет вместо чисто белого */
+            color: #E3D5CA !important;
             letter-spacing: 8px;
-            text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
-            margin-top: 5px;
+            margin-top: 15px;
+            text-shadow: 1px 1px 10px rgba(0,0,0,0.7);
         }
-        
+                
+        }
+                
         /* 2. ФИКС КАЛЕНДАРЯ */
         .calendar-container { 
             max-width: 95%; /* Вместо фиксированных пикселей */
@@ -449,6 +469,7 @@
     </script>
 </body>
 </html>
+
 
 
 
