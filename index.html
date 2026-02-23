@@ -161,49 +161,48 @@
         }
                 
         /* 2. ФИКС КАЛЕНДАРЯ */
+        .calendar-section { 
+            background-color: var(--cream); 
+            width: 100%;
+            padding: 60px 0; /* Чтобы секция была повыше и красивее */
+        }
+        
         .calendar-container { 
-            width: 100%; /* Занимает всю ширину родителя */
-            max-width: 350px; 
-            margin: 30px auto; 
+            max-width: 550px; 
+            width: 90%; /* На мобильных займет 90% ширины, на ПК — максимум 550px */
+            margin: 40px auto; 
             border: 2px solid var(--chocolate); 
-            padding: 25px 15px; /* Увеличили отступы сверху/снизу для красоты */
+            padding: clamp(15px, 5vw, 40px); /* Умный отступ: на мобилках поменьше, на ПК — 40px */
             background: white; 
-            box-sizing: border-box;
+            box-sizing: border-box; /* КРИТИЧНО: чтобы padding не выталкивал календарь за экран */
         }
         
         .calendar-grid { 
             display: grid; 
-            grid-template-columns: repeat(7, 1fr); /* 7 идеально равных колонок */
+            grid-template-columns: repeat(7, 1fr); 
+            gap: clamp(4px, 2vw, 12px); /* Гибкий зазор между числами */
+            font-size: clamp(1rem, 4vw, 1.4rem); /* Шрифт уменьшится на мобилках, чтобы влезть */
             text-align: center;
-            align-items: center;
         }
         
         .day-name { 
             color: var(--accent-beige); 
             font-weight: bold; 
-            font-size: 0.9rem; 
-            margin-bottom: 15px;
-            font-family: 'Jost', sans-serif;
-        }
-        
-        /* Ячейки с числами */
-        .calendar-grid div:not(.day-name) {
-            aspect-ratio: 1 / 1; /* Делает ячейки квадратными */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.1rem;
+            margin-bottom: 10px;
         }
         
         .wedding-day { 
             background-color: var(--accent-beige); 
             color: white; 
             border-radius: 50%; 
-            width: 35px; /* Вернули нормальный размер кружка */
-            height: 35px; 
-            margin: 0 auto;
+            width: clamp(30px, 8vw, 45px); /* Гибкий размер кружка */
+            height: clamp(30px, 8vw, 45px); 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            margin: 0 auto; 
+            transform: scale(1.1); 
             font-weight: bold;
-            box-shadow: 0 0 10px rgba(139, 94, 60, 0.3);
         }
         /* 3. ФИКС СЛАЙДЕРА (ПОЖЕЛАНИЯ) */
         .wish-viewport { 
@@ -491,6 +490,7 @@
     </script>
 </body>
 </html>
+
 
 
 
