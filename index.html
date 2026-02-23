@@ -13,7 +13,10 @@
             --white: #FFFFFF;
             --cream: #F2EDE4;
         }
-
+        body {
+            overscroll-behavior-y: none; /* Предотвращает "резиновый" эффект при обновлении страницы */
+            -webkit-overflow-scrolling: touch;
+        }
         body, html {
             margin: 0; padding: 0;
             font-family: 'Jost', sans-serif;
@@ -491,6 +494,7 @@
     </script>
 </body>
 </html>
+
 
 
 
