@@ -403,10 +403,11 @@
             else { audio.pause(); document.getElementById('pauseIcon').style.display = "none"; document.getElementById('playIcon').style.display = "block"; }
         });
 
-        function moveSlider(direction) {
-            let current = Math.round(slider.scrollLeft / slider.offsetWidth);
-            current = (current + direction + 3) % 3;
-            slider.scrollTo({ left: slider.offsetWidth * current, behavior: 'smooth' });
+            function moveSlider(direction) {
+            const current = Math.round(slider.scrollLeft / slider.offsetWidth);
+            // Если у тебя 2 слайда, используй число 2
+            let next = (current + direction + 2) % 2; 
+            slider.scrollTo({ left: slider.offsetWidth * next, behavior: 'smooth' });
         }
 
         slider.addEventListener('scroll', () => {
@@ -438,4 +439,5 @@
     </script>
 </body>
 </html>
+
 
