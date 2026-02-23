@@ -279,11 +279,11 @@
         .submit-btn:hover { background: var(--accent-beige); }
 
         #partnerWrapper {
-        overflow: hidden;
-        max-height: 0;
-        transition: max-height 0.6s ease, opacity 0.6s ease;
-        will-change: max-height;
-        opacity: 0; /* добавим начальную прозрачность */
+            overflow: hidden;
+            max-height: 0;
+            opacity: 0;
+            transition: max-height 0.6s ease, opacity 0.6s ease;
+            will-change: max-height;
         }
         /* АНИМАЦИЯ */
         .reveal { opacity: 0; transform: translateY(50px); transition: 1.2s ease-out; }
@@ -317,8 +317,8 @@
     </div>
 
     <section class="hero">
-        <h1 class="reveal">Свадьба Александра<br>& Дарьи</h1>
-        <div class="block-subtitle reveal" style="color:white">08.08.2026</div>
+        <h1>Свадьба Александра<br>& Дарьи</h1>
+        <div class="block-subtitle" style="color:white">08.08.2026</div>
     </section>
 
     <section class="reveal" style="background: white;">
@@ -411,12 +411,12 @@
                     <option value="пара">Я приду с парой</option>
                     <option value="нет">К сожалению, не смогу</option>
                 </select>
-
-                <div id="partnerWrapper" class="partner-input-wrapper" style="overflow:hidden; max-height:0; transition: 0.6s ease; opacity:0;">
+                
+                <div id="partnerWrapper" class="partner-input-wrapper">
                     <label>Имя партнера</label>
                     <input type="text" name="partner" placeholder="Как зовут вашу пару?">
                 </div>
-
+                
                 <label>Ваши предпочтения в баре</label>
                 <div class="alcohol-grid">
                     <label class="alcohol-item"><input type="checkbox" name="drinks" value="Белое вино"> Белое вино</label>
@@ -531,6 +531,7 @@
     </script>
 </body>
 </html>
+
 
 
 
