@@ -249,7 +249,15 @@
         .dresscode p { font-size: 1.3rem; margin-top: 20px; }
         .swatches { display: flex; gap: 15px; margin: 30px 0; justify-content: center; flex-wrap: wrap; }
         .swatch { width: 60px; height: 60px; border-radius: 50%; border: 3px solid white; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        .dresscode-img { width: 100%; max-width: 800px; height: auto; border-radius: 8px; margin-top: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+        .dresscode-img { 
+        width: 100%; 
+        max-width: 500px; /* Ограничим ширину, чтобы на больших экранах фото не было на весь мир */
+        height: auto; 
+        object-fit: contain; /* Картинка будет вписываться целиком без искажений */
+        border-radius: 12px; 
+        margin-top: 20px; 
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
 
         /* ПОЖЕЛАНИЯ */
         .wishes-section { background-color: var(--white); }
@@ -531,6 +539,7 @@
     </script>
 </body>
 </html>
+
 
 
 
