@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Приглашение | Александр и Дарья</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;1,400&family=Jost:wght@300;400;500&family=Great+Vibes&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --chocolate: #4E342E;
+            --accent-beige: #8B5E3C; 
+            --sand: #F9F7F2;
+            --white: #FFFFFF;
+            --cream: #F2EDE4;
+        }
+
+        body, html {
+            margin: 0; padding: 0;
+            font-family: 'Jost', sans-serif;
+            background-color: var(--sand);
+            color: var(--chocolate);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 100px 20px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .block-subtitle {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(2rem, 5vw, 3rem);
+            color: var(--accent-beige);
+            margin-bottom: 35px;
+        }
+
+        h2 {
+            font-family: 'Bodoni Moda', serif;
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            margin: 0;
+        }
+
+        .romance-text {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.2rem;
+            color: var(--chocolate);
+            margin-top: 25px;
+            opacity: 0.8;
+        }
+
+        /* --- ОБНОВЛЕННАЯ ЗАГЛУШКА --- */
+        #welcomeOverlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            display: flex; justify-content: center; align-items: center;
+            z-index: 10000;
+            background: url('https://imgfy.ru/ib/25UaqDXsImvYUp5_1771790575.jpg') center/cover;
+        }
+        .overlay-glass {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(28, 19, 16, 0.8); /* Чуть темнее для глубины */
+            backdrop-filter: blur(8px);
+        }
+        .overlay-content { 
+            position: relative; 
+            z-index: 1; 
+            text-align: center; 
+            color: white; 
+            padding: 60px 40px; 
+            border: 1px solid rgba(255,255,255,0.15); 
+            background: rgba(0,0,0,0.2);
+            max-width: 500px;
+            width: 80%;
+        }
+        .overlay-content h2 {
+            font-family: 'Bodoni Moda', serif; /* Новый шрифт */
+            font-size: clamp(1.2rem, 4vw, 1.8rem);
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+        .overlay-content h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(3rem, 10vw, 5rem);
+            margin: 0 0 30px 0;
+            color: #E3D5CA; /* Нежный оттенок для имен */
+        }
+        #acceptBtn { 
+            margin-top: 20px; 
+            padding: 20px 50px; 
+            background: transparent; 
+            color: white; 
+            border: 1px solid rgba(255,255,255,0.5); 
+            text-transform: uppercase; 
+            letter-spacing: 5px; 
+            cursor: pointer; 
+            font-family: 'Jost', sans-serif;
+            transition: all 0.4s ease;
+        }
+        #acceptBtn:hover {
+            background: white;
+            color: var(--chocolate);
+            border-color: white;
+        }
+        #welcomeOverlay.hidden { opacity: 0; visibility: hidden; transition: 1.5s cubic-bezier(0.4, 0, 0.2, 1); }
+
+        /* МУЗЫКА */
+        .music-control { position: fixed; bottom: 30px; right: 30px; z-index: 1000; background: white; border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+        .music-control svg { width: 26px; fill: var(--chocolate); }
+
+        /* HERO */
+        .hero { background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://imgfy.ru/ib/25UaqDXsImvYUp5_1771790575.jpg') center/cover fixed; color: white; }
+        .hero h1 { font-family: 'Bodoni Moda', serif; font-size: clamp(2.5rem, 8vw, 5.5rem); text-transform: uppercase; line-height: 1.2; }
+
+        /* STORY */
+        .photo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; width: 100%; max-width: 1200px; margin-top: 40px; }
+        .photo-grid img { width: 100%; height: 65vh; object-fit: cover; border-radius: 4px; }
+
+        /* КАЛЕНДАРЬ */
+        .calendar-section { background-color: var(--cream); }
+        .calendar-container { max-width: 550px; width: 100%; margin: 40px auto; border: 2px solid var(--chocolate); padding: 40px; background: white; }
+        .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 12px; font-size: 1.4rem; }
+        .wedding-day { background-color: var(--accent-beige); color: white; border-radius: 50%; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; margin: 0 auto; transform: scale(1.1); }
+        .day-name { color: var(--accent-beige); font-weight: bold; }
+
+        /* ДРЕСС-КОД */
+        .dresscode p { font-size: 1.3rem; margin-top: 20px; }
+        .swatches { display: flex; gap: 15px; margin: 30px 0; justify-content: center; flex-wrap: wrap; }
+        .swatch { width: 60px; height: 60px; border-radius: 50%; border: 3px solid white; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .dresscode-img { width: 100%; max-width: 800px; height: auto; border-radius: 8px; margin-top: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+
+        /* ПОЖЕЛАНИЯ */
+        .wishes-section { background-color: var(--white); }
+        .wishes-container { position: relative; max-width: 900px; width: 100%; margin: 0 auto; }
+        .wish-viewport { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; scroll-behavior: smooth; }
+        .wish-viewport::-webkit-scrollbar { display: none; }
+        .wish-card { flex: 0 0 100%; scroll-snap-align: center; padding: 20px; box-sizing: border-box; }
+        .wish-card-inner { background: var(--sand); padding: 70px 50px; border-radius: 12px; min-height: 450px; display: flex; flex-direction: column; justify-content: center; }
+        .wish-card h3 { font-family: 'Bodoni Moda', serif; font-size: 1.8rem; color: var(--accent-beige); margin-bottom: 25px; text-transform: uppercase; }
+        .wish-card p { font-size: 1.6rem; line-height: 1.8; color: #444; }
+        .slider-nav { display: flex; align-items: center; justify-content: center; gap: 40px; margin-top: 30px; }
+        .nav-btn { background: none; border: 1px solid var(--accent-beige); color: var(--accent-beige); width: 60px; height: 60px; border-radius: 50%; cursor: pointer; font-size: 1.2rem; }
+        #counter { color: var(--accent-beige); }
+
+        /* МЕСТО */
+        .venue-section { background-color: var(--cream); }
+        .map-btn { padding: 20px 50px; background: var(--accent-beige); color: white; text-decoration: none; font-weight: bold; letter-spacing: 3px; border-radius: 4px; transition: 0.3s; }
+
+        /* АНКЕТА */
+        .glass-form { max-width: 850px; width: 92%; background: white; padding: 70px 60px; text-align: left; box-shadow: 0 30px 80px rgba(0,0,0,0.08); }
+        .glass-form label { display: block; margin-top: 45px; font-size: 1rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; color: #777; }
+        .glass-form input[type="text"], .glass-form select { width: 100%; padding: 20px 0; border: none; border-bottom: 3px solid #eee; background: transparent; font-family: inherit; font-size: 1.3rem; outline: none; transition: 0.3s; }
+        .alcohol-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-top: 30px; }
+        .alcohol-item { display: flex; align-items: center; gap: 15px; font-size: 1.3rem; cursor: pointer; }
+        .alcohol-item input { width: 22px; height: 22px; accent-color: var(--accent-beige); }
+        .submit-btn { width: 100%; padding: 30px; background: var(--chocolate); color: white; border: none; margin-top: 60px; text-transform: uppercase; letter-spacing: 5px; cursor: pointer; font-size: 1.3rem; font-weight: bold; transition: 0.3s; }
+        .submit-btn:hover { background: var(--accent-beige); }
+
+        /* АНИМАЦИЯ */
+        .reveal { opacity: 0; transform: translateY(50px); transition: 1.2s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 768px) {
+            .glass-form { padding: 50px 30px; }
+            .alcohol-grid { grid-template-columns: 1fr; }
+            section { height: auto; }
+            .swatch { width: 50px; height: 50px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="welcomeOverlay">
+        <div class="overlay-glass"></div>
+        <div class="overlay-content">
+            <h1>Присоединитесь к нашему празднику</h1>
+            <button id="acceptBtn">Открыть приглашение</button>
+        </div>
+    </div>
+
+    <audio id="bgMusic" loop playsinline>
+        <source src="https://www.dropbox.com/scl/fi/ixxuxsptcot8ejtrbr2h5/BeqbmAxo7shPjeALZJEjXJ.mp3?rlkey=axb7olsfzmdsv19qshm812j9z&st=vhpj70qb&raw=1" type="audio/mpeg">
+    </audio>
+
+    <div class="music-control" id="musicBtn">
+        <svg id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        <svg id="pauseIcon" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+    </div>
+
+    <section class="hero">
+        <h1 class="reveal">Свадьба Александра<br>& Дарьи</h1>
+        <div class="block-subtitle reveal" style="color:white">08.08.2026</div>
+    </section>
+
+    <section class="reveal" style="background: white;">
+        <h2>Наша история</h2>
+        <div class="block-subtitle">В каждом моменте</div>
+        <div class="photo-grid">
+            <img src="https://imgfy.ru/ib/dPOqpGwOc0wctgQ_1771790577.jpg">
+            <img src="https://imgfy.ru/ib/wkQ7EZYGlwFiKfT_1771790574.jpg">
+            <img src="https://imgfy.ru/ib/aR7JAbikAK2bwGD_1771790574.jpg">
+        </div>
+        <div class="romance-text">Любовь — это путешествие, которое только начинается...</div>
+    </section>
+
+    <section class="reveal calendar-section">
+        <h2>Сохраните дату</h2>
+        <div class="block-subtitle">Август 2026</div>
+        <div class="calendar-container">
+            <div class="calendar-grid">
+                <div class="day-name">ПН</div><div class="day-name">ВТ</div><div class="day-name">СР</div><div class="day-name">ЧТ</div><div class="day-name">ПТ</div><div class="day-name">СБ</div><div class="day-name">ВС</div>
+                <div></div><div></div><div></div><div></div><div></div><div>1</div><div>2</div>
+                <div>3</div><div>4</div><div>5</div><div>6</div><div>7</div><div><div class="wedding-day">8</div></div><div>9</div>
+                <div>10</div><div>11</div><div>12</div><div>13</div><div>14</div><div>15</div><div>16</div>
+                <div>17</div><div>18</div><div>19</div><div>20</div><div>21</div><div>22</div><div>23</div>
+                <div>24</div><div>25</div><div>26</div><div>27</div><div>28</div><div>29</div><div>30</div><div>31</div>
+            </div>
+        </div>
+        <div class="romance-text">В этот день мы скажем друг другу «Да»</div>
+    </section>
+
+    <section class="dresscode reveal" style="background-color: var(--sand);">
+        <h2>Дресс-код</h2>
+        <div class="block-subtitle">Ваша красота — лучшее украшение вечера</div>
+        <p>Будем признательны за поддержку палитры нашей свадьбы:</p>
+        <div class="swatches">
+            <div class="swatch" style="background-color: #E3D5CA;"></div>
+            <div class="swatch" style="background-color: #D6BD98;"></div>
+            <div class="swatch" style="background-color: #8B5E3C;"></div>
+            <div class="swatch" style="background-color: #4B3621;"></div>
+            <div class="swatch" style="background-color: #2C1E12;"></div>
+        </div>
+        <img src="https://imgfy.ru/ib/U8DbRGOnh0FMHII_1771790574.jpg" alt="Dresscode" class="dresscode-img">
+    </section>
+
+    <section class="reveal wishes-section">
+        <h2>Наши пожелания</h2>
+        <div class="block-subtitle">О самом важном</div>
+        <div class="wishes-container">
+            <div class="wish-viewport" id="slider">
+                <div class="wish-card">
+                    <div class="wish-card-inner">
+                        <h3>АТМОСФЕРА ПРАЗДНИКА</h3>
+                        <p>Мы мечтаем, чтобы этот вечер стал для вас сказкой. Пожалуйста, забудьте о повседневных заботах и наслаждайтесь моментом вместе с нами.</p>
+                    </div>
+                </div>
+                <div class="wish-card">
+                    <div class="wish-card-inner">
+                        <h3>ТИШИНА И ЧУВСТВА</h3>
+                        <p>Мы просим вас воздержаться от криков «Горько!». Пусть вместо этого звучит искренний смех, теплые тосты и красивая музыка.</p>
+                    </div>
+                </div>
+                <div class="wish-card">
+                    <div class="wish-card-inner">
+                        <h3>ЦВЕТЫ И ПОДАРКИ</h3>
+                        <p>Ваше присутствие — главный подарок. Если захотите порадовать нас — мы будем благодарны за вклад в наш семейный бюджет.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-nav">
+                <button class="nav-btn" onclick="moveSlider(-1)">&#10229;</button>
+                <div style="font-size: 1.5rem; letter-spacing: 5px; font-weight: bold;" id="counter">1 / 3</div>
+                <button class="nav-btn" onclick="moveSlider(1)">&#10230;</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="reveal venue-section">
+        <h2>Где всё случится</h2>
+        <div class="block-subtitle">Трактир «Тёплая Речка»</div>
+        <p style="font-size: 1.6rem; margin-bottom: 40px;">Йошкар-Ола, Красноармейская слобода, 61</p>
+        <img src="https://imgfy.ru/ib/gKmWZPOXhK8UbZW_1771790575.png" style="width: 100%; max-width: 1000px; height: 50vh; object-fit: cover; border-radius: 8px;">
+        <br><br>
+        <a href="https://yandex.ru/maps/org/tyoplaya_rechka/1466524122" target="_blank" class="map-btn">ОТКРЫТЬ КАРТУ</a>
+    </section>
+
+    <section class="reveal" style="background: white;">
+        <div class="glass-form">
+            <h2 style="text-align: center;">Анкета гостя</h2>
+            <div class="block-subtitle" style="font-size: 2.2rem; text-align: center; margin-bottom: 50px;">Ваш ответ очень важен для нас</div>
+            <form id="weddingForm">
+                <label>Ваше Имя и Фамилия</label>
+                <input type="text" name="name" placeholder="Введите имя..." required>
+
+                <label>Присутствие</label>
+                <select name="presence" id="presenceSelect" onchange="togglePartner()">
+                    <option value="один">Я приду один / одна</option>
+                    <option value="пара">Я приду с парой</option>
+                    <option value="нет">К сожалению, не смогу</option>
+                </select>
+
+                <div id="partnerWrapper" class="partner-input-wrapper" style="overflow:hidden; max-height:0; transition: 0.6s ease; opacity:0;">
+                    <label>Имя партнера</label>
+                    <input type="text" name="partner" placeholder="Как зовут вашу пару?">
+                </div>
+
+                <label>Ваши предпочтения в баре</label>
+                <div class="alcohol-grid">
+                    <label class="alcohol-item"><input type="checkbox" name="drinks" value="Белое вино"> Белое вино</label>
+                    <label class="alcohol-item"><input type="checkbox" name="drinks" value="Красное вино"> Красное вино</label>
+                    <label class="alcohol-item"><input type="checkbox" name="drinks" value="Игристое"> Игристое</label>
+                    <label class="alcohol-item"><input type="checkbox" name="drinks" value="Виски"> Виски</label>
+                    <label class="alcohol-item"><input type="checkbox" name="drinks" value="Коньяк"> Коньяк</label>
+                    <label class="alcohol-item"><input type="checkbox" name="drinks" value="Водка"> Водка</label>
+                </div>
+                <label>Свой вариант / пожелания</label>
+                <input type="text" name="custom_drink" placeholder="Напишите здесь...">
+
+                <button type="submit" class="submit-btn" id="submitBtn">Подтвердить участие</button>
+            </form>
+            <div id="success" style="display:none; text-align:center; padding: 40px 0;">
+                <h3 style="font-family: 'Great Vibes', cursive; font-size: 4rem; color: var(--accent-beige);">Спасибо!</h3>
+                <p style="font-size: 1.5rem;">Ваш ответ принят.</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const audio = document.getElementById('bgMusic');
+        const welcomeOverlay = document.getElementById('welcomeOverlay');
+        const slider = document.getElementById('slider');
+        const counter = document.getElementById('counter');
+
+        document.getElementById('acceptBtn').addEventListener('click', () => {
+            welcomeOverlay.classList.add('hidden');
+            audio.play().catch(e => console.log("Music play blocked"));
+            document.getElementById('pauseIcon').style.display = "block";
+            document.getElementById('playIcon').style.display = "none";
+        });
+
+        document.getElementById('musicBtn').addEventListener('click', () => {
+            if (audio.paused) { audio.play(); document.getElementById('pauseIcon').style.display = "block"; document.getElementById('playIcon').style.display = "none"; }
+            else { audio.pause(); document.getElementById('pauseIcon').style.display = "none"; document.getElementById('playIcon').style.display = "block"; }
+        });
+
+        function moveSlider(direction) {
+            let current = Math.round(slider.scrollLeft / slider.offsetWidth);
+            current = (current + direction + 3) % 3;
+            slider.scrollTo({ left: slider.offsetWidth * current, behavior: 'smooth' });
+        }
+
+        slider.addEventListener('scroll', () => {
+            const current = Math.round(slider.scrollLeft / slider.offsetWidth);
+            counter.innerText = `${current + 1} / 3`;
+        });
+
+        function togglePartner() {
+            const val = document.getElementById('presenceSelect').value;
+            const wrap = document.getElementById('partnerWrapper');
+            wrap.style.maxHeight = (val === 'пара') ? '200px' : '0';
+            wrap.style.opacity = (val === 'пара') ? '1' : '0';
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbyYeb8PJXbkqzQNdh8dO952rlykomLnbQbK2zhbEMqV9DAL1aj-XgSDIJX5Op2KC8dr3Q/exec';
+        const form = document.getElementById('weddingForm');
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            document.getElementById('submitBtn').disabled = true;
+            document.getElementById('submitBtn').innerText = 'ОТПРАВЛЯЕМ...';
+            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                .then(() => { form.style.display = 'none'; document.getElementById('success').style.display = 'block'; });
+        });
+    </script>
+</body>
+</html>
