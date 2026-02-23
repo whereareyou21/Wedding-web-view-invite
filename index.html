@@ -161,55 +161,50 @@
         }
                 
         /* 2. ФИКС КАЛЕНДАРЯ */
-         .calendar-container { 
-            width: 92% !important; /* Строго 92% от ширины экрана */
-            max-width: 350px; 
-            margin: 20px auto; 
+        .calendar-container { 
+            width: 100%; /* Занимает всю ширину родителя */
+            max-width: 450px; 
+            margin: 30px auto; 
             border: 2px solid var(--chocolate); 
-            padding: 10px !important; 
+            padding: 25px 15px; /* Увеличили отступы сверху/снизу для красоты */
             background: white; 
-            box-sizing: border-box !important; /* Учитывает границы в общей ширине */
-            overflow: hidden; /* Запрещает вылет элементов наружу */
+            box-sizing: border-box;
         }
         
         .calendar-grid { 
             display: grid; 
-            grid-template-columns: repeat(7, 1fr); /* Ровно 7 равных колонок */
-            gap: 2px; /* Минимальный зазор */
+            grid-template-columns: repeat(7, 1fr); /* 7 идеально равных колонок */
             text-align: center;
-            width: 100%;
+            align-items: center;
         }
         
         .day-name { 
             color: var(--accent-beige); 
             font-weight: bold; 
-            font-size: 0.75rem; /* Уменьшаем названия дней: ПН, ВТ... */
-            padding-bottom: 10px;
-            text-transform: uppercase;
+            font-size: 0.9rem; 
+            margin-bottom: 15px;
+            font-family: 'Jost', sans-serif;
         }
         
-        .calendar-grid div:not(.day-name):not(.wedding-day) {
-            font-size: 0.9rem; /* Размер обычных чисел */
+        /* Ячейки с числами */
+        .calendar-grid div:not(.day-name) {
+            aspect-ratio: 1 / 1; /* Делает ячейки квадратными */
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 35px; /* Фиксированная высота ячейки */
+            font-size: 1.1rem;
         }
         
         .wedding-day { 
             background-color: var(--accent-beige); 
             color: white; 
             border-radius: 50%; 
-            width: 30px; 
-            height: 30px; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
+            width: 35px; /* Вернули нормальный размер кружка */
+            height: 35px; 
             margin: 0 auto;
-            font-size: 0.9rem;
             font-weight: bold;
+            box-shadow: 0 0 10px rgba(139, 94, 60, 0.3);
         }
-                
         /* 3. ФИКС СЛАЙДЕРА (ПОЖЕЛАНИЯ) */
         .wish-viewport { 
             display: flex; 
@@ -496,6 +491,7 @@
     </script>
 </body>
 </html>
+
 
 
 
